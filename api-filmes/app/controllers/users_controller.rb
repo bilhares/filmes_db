@@ -7,15 +7,10 @@ class UsersController < ApplicationController
   def login
     user = User.find_by(email: params[:email].downcase)
     if user && user.authenticate(params[:password])
-      render json: {"token":user.token}
+      render json: {"token":user.token, "user_id":user.id}
     else
       render json: {"message":"Username or password is invalid"}
     end 
-  end
-
-  # GET /users/1
-  def show
-    render json: @user
   end
 
   # POST /users
